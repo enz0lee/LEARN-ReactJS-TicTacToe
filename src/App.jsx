@@ -65,6 +65,7 @@ function App() {
   }
 
   const winner = checkWinner(gameBoard)
+  const isDraw = gameTurns.length === 9 && !winner
 
   function handleTileClick(rowIndex, colIndex) {
     console.log(`Tile clicked at row ${rowIndex}, column ${colIndex}`)
@@ -86,7 +87,9 @@ function App() {
           <Player name="Player 1" symbol="X" isActive={activePlayer === 'X'} />
           <Player name="Player 2" symbol="O" isActive={activePlayer === 'O'} />
         </ol>
-        {winner && <GameOver winner={winner} onRestart={() => {}} />}
+        {(winner || isDraw) && (
+          <GameOver winner={winner} onRestart={() => {}} />
+        )}
         <GameBoard onTileClick={handleTileClick} gameBoard={gameBoard} />
       </div>
       <Log turns={gameTurns} />
