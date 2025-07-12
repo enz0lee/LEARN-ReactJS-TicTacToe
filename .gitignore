@@ -8,8 +8,6 @@ dist/
 .env
 .env.* # e.g., .env.local, .env.development
 .npmrc
-package-lock.json
-yarn.lock
 .pnp.*
 .pnp
 
