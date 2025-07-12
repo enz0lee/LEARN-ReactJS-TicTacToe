@@ -58,7 +58,8 @@ function App() {
   const [gameTurns, setGameTurns] = useState([])
   let activePlayer = deriveActivePlayer(gameTurns)
 
-  let gameBoard = initialGameBoard
+  // Create a copy of the initial game board
+  const gameBoard = initialGameBoard.map((row) => [...row])
   for (const turn of gameTurns) {
     const { square, player } = turn
     gameBoard[square.row][square.col] = player
@@ -80,6 +81,11 @@ function App() {
       return updatedTurns
     })
   }
+
+  function handleRestart() {
+    setGameTurns([])
+  }
+
   return (
     <main>
       <div id="game-container">
@@ -88,7 +94,7 @@ function App() {
           <Player name="Player 2" symbol="O" isActive={activePlayer === 'O'} />
         </ol>
         {(winner || isDraw) && (
-          <GameOver winner={winner} onRestart={() => {}} />
+          <GameOver winner={winner} onRestart={handleRestart} />
         )}
         <GameBoard onTileClick={handleTileClick} gameBoard={gameBoard} />
       </div>
