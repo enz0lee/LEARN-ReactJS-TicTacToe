@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Player({ name: initialName, symbol, isActive }) {
+function Player({ name: initialName, symbol, isActive, onNameChange }) {
   const [name, setName] = useState(initialName)
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState(initialName)
@@ -14,6 +14,7 @@ function Player({ name: initialName, symbol, isActive }) {
   function handleSaveClick() {
     setName(editedName)
     setIsEditing(false)
+    onNameChange(symbol, editedName)
   }
 
   function handleNameChange(event) {
